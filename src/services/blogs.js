@@ -25,6 +25,16 @@ const update = async (objectToUpdate) => {
   return response.data;
 };
 
+const deleteBlog = async (objectToDelete) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const objectId = objectToDelete.id;
+  const url = `${baseUrl}/${objectId}`;
+  const response = await axios.delete(url, config);
+  return response.data;
+};
+
 const getAll = () => {
   const request = axios.get(baseUrl);
   return request.then((response) => response.data);
@@ -35,5 +45,6 @@ const blogService = {
   create: create,
   setToken: setToken,
   update: update,
+  deleteBlog: deleteBlog,
 };
 export default blogService;

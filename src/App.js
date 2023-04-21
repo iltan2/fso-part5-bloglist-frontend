@@ -52,7 +52,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("notifmessage", notifMessage);
     setTimeout(() => {
       setNotifMessage(null);
     }, 2000);
@@ -104,7 +103,7 @@ const App = () => {
         />
       </Togglable>
       {sortedBlogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} />
+        <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} currUser={user} />
       ))}
     </div>
   );
