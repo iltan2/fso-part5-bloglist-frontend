@@ -11,9 +11,17 @@ const create = async (newObject) => {
   const config = {
     headers: { Authorization: token },
   };
-  console.log("token", token);
-  console.log("newObject", newObject);
   const response = await axios.post(baseUrl, newObject, config);
+  return response.data;
+};
+
+const update = async (objectToUpdate) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const objectId = objectToUpdate.id;
+  const url = `${baseUrl}/${objectId}`;
+  const response = await axios.put(url, objectToUpdate, config);
   return response.data;
 };
 
@@ -22,5 +30,10 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
-const blogService = { getAll: getAll, create: create, setToken: setToken };
+const blogService = {
+  getAll: getAll,
+  create: create,
+  setToken: setToken,
+  update: update,
+};
 export default blogService;

@@ -1,10 +1,29 @@
 import { useState } from "react";
+import blogService from "../services/blogs";
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, blogs, setBlogs }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const toggleDetails = () => {
+    console.log("blog", blog);
     setShowDetails(!showDetails);
+  };
+
+  const addLikeHandler = async () => {
+    console.log("adding 1 like");
+    const newLikes = blog.likes + 1;
+    const updatedBlog = { ...blog, likes: newLikes };
+
+    await blogService.update(updatedBlog);
+    const updatedBlogs = blogs.map((blog) => {
+      if (blog.id === updatedBlog.id) {
+        return updatedBlog;
+      } else {
+        return blog;
+      }
+    });
+
+    setBlogs(updatedBlogs);
   };
 
   const blogCreator = blog.user ? blog.user.name : null;
@@ -32,7 +51,10 @@ const Blog = ({ blog }) => {
       <div style={shownWhenTrue}>
         <div>Author: {blog.author}</div>
         <div>URL: {blog.url}</div>
-        <div>Likes: {blog.likes}</div>
+        <div>
+          Likes: {blog.likes}
+          <button onClick={addLikeHandler}>add like</button>
+        </div>
         <div>User: {blogCreator}</div>
       </div>
     </div>
