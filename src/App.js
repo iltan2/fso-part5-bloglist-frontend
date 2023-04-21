@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Blog from "./components/Blog";
 import BlogAdder from "./components/BlogAdder";
+import Togglable from "./components/Togglable";
 
 import blogService from "./services/blogs";
 import loginService from "./services/login";
@@ -51,11 +52,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('notifmessage',notifMessage)
+    console.log("notifmessage", notifMessage);
     setTimeout(() => {
       setNotifMessage(null);
     }, 2000);
-    console.log('notifmessage',notifMessage)
+    console.log("notifmessage", notifMessage);
   }, [notifMessage]);
   const loginForm = () => (
     <div>
@@ -84,17 +85,22 @@ const App = () => {
     </div>
   );
 
+  const blogFormRef = useRef();
+
   const blogForm = () => (
     <div>
       <h2>blogs</h2>
       <span>{user.name} logged in</span>
       <button onClick={logoutHandler}>logout</button>
-      <BlogAdder
-        blogs={blogs}
-        setBlogs={setBlogs}
-        setNotifMessage={setNotifMessage}
-        setMessageType={setMessageType}
-      />
+      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+        <BlogAdder
+          blogs={blogs}
+          setBlogs={setBlogs}
+          setNotifMessage={setNotifMessage}
+          setMessageType={setMessageType}
+          blogFormRef={blogFormRef}
+        />
+      </Togglable>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
