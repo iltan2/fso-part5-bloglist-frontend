@@ -1,7 +1,7 @@
 import { useState } from "react";
 import blogService from "../services/blogs";
 
-const BlogAdder = ({ blogs, setBlogs }) => {
+const BlogAdder = ({ blogs, setBlogs, setNotifMessage, setMessageType }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -14,6 +14,10 @@ const BlogAdder = ({ blogs, setBlogs }) => {
 
     const newBlogs = [...blogs, newBlog];
     setBlogs(newBlogs);
+
+    setMessageType("notif");
+    setNotifMessage(`a new blog "${title}" is added!`);
+
   };
 
   return (
