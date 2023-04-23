@@ -1,30 +1,17 @@
 import { useState } from "react";
-import blogService from "../services/blogs";
 
-const BlogAdder = ({
-  blogs,
-  setBlogs,
-  setNotifMessage,
-  setMessageType,
-  blogFormRef,
-}) => {
+const BlogAdder = ({ addBlog, blogFormRef }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
 
-  const addBlogHandler = async (event) => {
+  const addBlogHandler = (event) => {
     event.preventDefault();
-    console.log("adding to blogs");
-    blogFormRef.current.toggleVisibility();
-
     const newObj = { title: title, author: author, url: url };
-    const newBlog = await blogService.create(newObj);
-
-    const newBlogs = [...blogs, newBlog];
-    setBlogs(newBlogs);
-
-    setMessageType("notif");
-    setNotifMessage(`a new blog "${title}" is added!`);
+    console.log("newObj", newObj);
+    addBlog(newObj);
+    console.log("done with adding")
+    blogFormRef.current.toggleVisibility();
   };
 
   return (

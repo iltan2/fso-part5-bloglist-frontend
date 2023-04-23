@@ -118,6 +118,14 @@ const App = () => {
     }
   };
 
+  const addBlog = async (newObj) => {
+    console.log("adding to blogs");
+    const newBlog = await blogService.create(newObj);
+    const newBlogs = [...blogs, newBlog];
+    setBlogs(newBlogs);
+    setMessageType("notif");
+    setNotifMessage(`a new blog "${newObj.title}" is added!`);
+  };
 
   const blogForm = () => (
     <div>
@@ -125,13 +133,7 @@ const App = () => {
       <span>{user.name} logged in</span>
       <button onClick={logoutHandler}>logout</button>
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
-        <BlogAdder
-          blogs={blogs}
-          setBlogs={setBlogs}
-          setNotifMessage={setNotifMessage}
-          setMessageType={setMessageType}
-          blogFormRef={blogFormRef}
-        />
+        <BlogAdder addBlog={addBlog} blogFormRef={blogFormRef} />
       </Togglable>
       {sortedBlogs.map((blog) => (
         <Blog
