@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser }) => {
+const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser, idx }) => {
   const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => {
     console.log("blog", blog);
@@ -32,7 +32,7 @@ const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser }) => {
         hide details
       </button>
       {showDeleteButton && (
-        <button onClick={deleteBlogHandler}>delete blog</button>
+        <button onClick={deleteBlogHandler} id={`delete-blog-${idx}`}>delete blog</button>
       )}
       <div style={shownWhenTrue}>
         <div>Author: {blog.author}</div>

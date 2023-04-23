@@ -140,13 +140,14 @@ const App = () => {
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
         <BlogAdder addBlog={addBlog} blogFormRef={blogFormRef} />
       </Togglable>
-      {sortedBlogs.map((blog) => (
+      {sortedBlogs.map((blog, idx) => (
         <Blog
           key={blog.id}
           blog={blog}
           addLikeHandler={addLikeHandler(blog)}
           deleteBlogHandler={deleteBlogHandler(blog)}
           currUser={user}
+          idx={idx}
         />
       ))}
     </div>
