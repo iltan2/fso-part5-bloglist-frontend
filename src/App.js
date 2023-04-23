@@ -119,10 +119,11 @@ const App = () => {
   };
 
   const addBlog = async (newObj) => {
-    console.log("adding to blogs");
     const newBlog = await blogService.create(newObj);
+    console.log("newBlog", newBlog);
     const newBlogs = [...blogs, newBlog];
     setBlogs(newBlogs);
+    blogFormRef.current.toggleVisibility();
     setMessageType("notif");
     setNotifMessage(`a new blog "${newObj.title}" is added!`);
   };

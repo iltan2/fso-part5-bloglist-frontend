@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BlogAdder = ({ addBlog, blogFormRef }) => {
+const BlogAdder = ({ addBlog }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -8,10 +8,7 @@ const BlogAdder = ({ addBlog, blogFormRef }) => {
   const addBlogHandler = (event) => {
     event.preventDefault();
     const newObj = { title: title, author: author, url: url };
-    console.log("newObj", newObj);
     addBlog(newObj);
-    console.log("done with adding")
-    blogFormRef.current.toggleVisibility();
   };
 
   return (
@@ -23,6 +20,7 @@ const BlogAdder = ({ addBlog, blogFormRef }) => {
           <input
             type="text"
             value={title}
+            placeholder="Input title here"
             onChange={({ target }) => setTitle(target.value)}
           />
         </div>
@@ -31,6 +29,7 @@ const BlogAdder = ({ addBlog, blogFormRef }) => {
           <input
             type="text"
             value={author}
+            placeholder="Input author here"
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
@@ -39,6 +38,7 @@ const BlogAdder = ({ addBlog, blogFormRef }) => {
           <input
             type="text"
             value={url}
+            placeholder="Input URL here"
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
