@@ -36,8 +36,8 @@ const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser }) => {
       )}
       <div style={shownWhenTrue}>
         <div>Author: {blog.author}</div>
-        <div>URL: {blog.url}</div>
-        <div>
+        <div className="url" style={shownWhenTrue}>URL: {blog.url}</div>
+        <div className="likes" style={shownWhenTrue}>
           Likes: {blog.likes}
           <button onClick={addLikeHandler}>add like</button>
         </div>
