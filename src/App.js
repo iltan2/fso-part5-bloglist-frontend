@@ -86,7 +86,38 @@ const App = () => {
 
   const blogFormRef = useRef();
 
-  const sortedBlogs = blogs.sort((a,b)=> a.likes - b.likes)
+  const sortedBlogs = blogs.sort((a, b) => a.likes - b.likes);
+
+  const addLikeHandler = (blog) => async () => {
+    console.log("adding 1 like");
+    const newLikes = blog.likes + 1;
+    const updatedBlog = { ...blog, likes: newLikes };
+
+    await blogService.update(updatedBlog);
+    const updatedBlogs = blogs.map((blog) => {
+      if (blog.id === updatedBlog.id) {
+        return updatedBlog;
+      } else {
+        return blog;
+      }
+    });
+
+    setBlogs(updatedBlogs);
+  };
+
+  const deleteBlogHandler = (blog) => async () => {
+    const reply = window.confirm(
+      `Are you sure you want to delete the blog "${blog.title}"?`
+    );
+    if (reply) {
+      console.log("Deleting blog...");
+      await blogService.deleteBlog(blog);
+      const updatedBlogs = blogs.filter((currBlog) => currBlog.id !== blog.id);
+      setBlogs(updatedBlogs);
+      console.log("Blog deleted.");
+    }
+  };
+
 
   const blogForm = () => (
     <div>
@@ -103,7 +134,13 @@ const App = () => {
         />
       </Togglable>
       {sortedBlogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} currUser={user} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          addLikeHandler={addLikeHandler(blog)}
+          deleteBlogHandler={deleteBlogHandler(blog)}
+          currUser={user}
+        />
       ))}
     </div>
   );

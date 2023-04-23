@@ -1,7 +1,13 @@
 import { useState } from "react";
 import blogService from "../services/blogs";
 
-const BlogAdder = ({ blogs, setBlogs, setNotifMessage, setMessageType, blogFormRef }) => {
+const BlogAdder = ({
+  blogs,
+  setBlogs,
+  setNotifMessage,
+  setMessageType,
+  blogFormRef,
+}) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
@@ -10,7 +16,7 @@ const BlogAdder = ({ blogs, setBlogs, setNotifMessage, setMessageType, blogFormR
     event.preventDefault();
     console.log("adding to blogs");
     blogFormRef.current.toggleVisibility();
-    
+
     const newObj = { title: title, author: author, url: url };
     const newBlog = await blogService.create(newObj);
 
@@ -19,7 +25,6 @@ const BlogAdder = ({ blogs, setBlogs, setNotifMessage, setMessageType, blogFormR
 
     setMessageType("notif");
     setNotifMessage(`a new blog "${title}" is added!`);
-
   };
 
   return (
