@@ -90,7 +90,7 @@ const App = () => {
 
   const blogFormRef = useRef();
 
-  const sortedBlogs = blogs.sort((a, b) => a.likes - b.likes);
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
 
   const addLikeHandler = (blog) => async () => {
     console.log("adding 1 like");

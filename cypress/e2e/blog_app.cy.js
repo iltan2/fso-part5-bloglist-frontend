@@ -101,21 +101,25 @@ describe("With many blogs from different users", function () {
         title: "Test title 1",
         author: "Test author 1",
         url: "Test author 1",
+        likes: 1,
       },
       {
         title: "Test title 2",
         author: "Test author 2",
         url: "Test author 2",
+        likes: 2,
       },
       {
         title: "Test title 3",
         author: "Test author 3",
         url: "Test author 3",
+        likes: 3,
       },
       {
         title: "Test title 4",
         author: "Test author 4",
         url: "Test author 4",
+        likes: 4,
       },
     ];
 
@@ -184,13 +188,24 @@ describe("With many blogs from different users", function () {
   });
 
   it("User who created the blog can delete it", function () {
-    cy.get("#delete-blog-2").click();
+    cy.get("#delete-blog-1").click(); // note that these are sorted descending by likes
     cy.contains("Test title 3").should("not.exist");
   });
 
   it("Only the creator can see the delete button", function () {
-    cy.get("#delete-blog-1").should("not.exist");
-    cy.get("#delete-blog-2")
+    cy.get("#delete-blog-2").should("not.exist"); // note that these are sorted descending by likes
+    cy.get("#delete-blog-1"); // note that these are sorted descending by likes
   });
 
+  it("Only the creator can see the delete button", function () {
+    cy.get("#delete-blog-2").should("not.exist"); // note that these are sorted descending by likes
+    cy.get("#delete-blog-1"); // note that these are sorted descending by likes
+  });
+
+  it("Blogs are sorted descending by likes ", function () {
+    cy.get(".blog").eq(0).should("contain", "Test title 4");
+    cy.get(".blog").eq(1).should("contain", "Test title 3");
+    cy.get(".blog").eq(2).should("contain", "Test title 2");
+    cy.get(".blog").eq(3).should("contain", "Test title 1");
+  });
 });

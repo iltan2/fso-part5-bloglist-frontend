@@ -23,7 +23,7 @@ const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser, idx }) => {
   };
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog">
       Title: {blog.title}
       <button onClick={toggleDetails} style={shownWhenFalse}>
         view details
@@ -32,12 +32,16 @@ const Blog = ({ blog, addLikeHandler, deleteBlogHandler, currUser, idx }) => {
         hide details
       </button>
       {showDeleteButton && (
-        <button onClick={deleteBlogHandler} id={`delete-blog-${idx}`}>delete blog</button>
+        <button onClick={deleteBlogHandler} id={`delete-blog-${idx}`}>
+          delete blog
+        </button>
       )}
       <div style={shownWhenTrue}>
         <div>Author: {blog.author}</div>
-        <div className="url" style={shownWhenTrue}>URL: {blog.url}</div>
-        <div className="likes" style={shownWhenTrue}>
+        <div className="url" style={shownWhenTrue}>
+          URL: {blog.url}
+        </div>
+        <div className="likes" style={shownWhenTrue} id={`likes-${idx}`}>
           Likes: {blog.likes}
           <button onClick={addLikeHandler}>add like</button>
         </div>
