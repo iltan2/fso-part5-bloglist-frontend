@@ -7,14 +7,13 @@ import Blog from "../components/Blog";
 describe("Exercise 5.13", () => {
   let currUser;
   let blog;
-  let container;
   beforeEach(() => {
     currUser = {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0MWY0Mzk1MTQyNjg3NThjZWViODk4IiwiaWF0IjoxNjgyMDkyMjI1fQ.M3n3JymjEunOyp_lflhGGPk9G1Ok_lLm2TUzkDzOCpM",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0NGM3YzQxNmEwOWExNDM0ZWIwYTAzIiwiaWF0IjoxNjgyMjI5MjI3fQ.qbICqKtO99gGD3boOjqgQQKm4rqttz1cnYB3YUVMuu8",
       username: "israel",
       name: "Admin User",
-      id: "6441f439514268758ceeb898",
+      id: "6444c7c416a09a1434eb0a03",
     };
 
     blog = {
@@ -24,7 +23,7 @@ describe("Exercise 5.13", () => {
       likes: 100,
     };
 
-    container = render(<Blog blog={blog} currUser={currUser} />).container;
+    render(<Blog blog={blog} currUser={currUser} />);
   });
 
   test("renders content", () => {
@@ -46,16 +45,15 @@ describe("Exercise 5.13", () => {
 describe("Exercise 5.14", () => {
   let currUser;
   let blog;
-  let container;
   let user;
   let button;
   beforeEach(() => {
     currUser = {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0MWY0Mzk1MTQyNjg3NThjZWViODk4IiwiaWF0IjoxNjgyMDkyMjI1fQ.M3n3JymjEunOyp_lflhGGPk9G1Ok_lLm2TUzkDzOCpM",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0NGM3YzQxNmEwOWExNDM0ZWIwYTAzIiwiaWF0IjoxNjgyMjI5MjI3fQ.qbICqKtO99gGD3boOjqgQQKm4rqttz1cnYB3YUVMuu8",
       username: "israel",
       name: "Admin User",
-      id: "6441f439514268758ceeb898",
+      id: "6444c7c416a09a1434eb0a03",
     };
 
     blog = {
@@ -65,7 +63,7 @@ describe("Exercise 5.14", () => {
       likes: 100,
     };
 
-    container = render(<Blog blog={blog} currUser={currUser} />).container;
+    render(<Blog blog={blog} currUser={currUser} />);
 
     user = userEvent.setup();
     button = screen.getByText("view details");
@@ -89,18 +87,17 @@ describe("Exercise 5.14", () => {
 describe("Exercise 5.15", () => {
   let currUser;
   let blog;
-  let mockHander;
-  let container;
+  let mockHandler;
   let user;
   let button;
 
   beforeEach(() => {
     currUser = {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0MWY0Mzk1MTQyNjg3NThjZWViODk4IiwiaWF0IjoxNjgyMDkyMjI1fQ.M3n3JymjEunOyp_lflhGGPk9G1Ok_lLm2TUzkDzOCpM",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlzcmFlbCIsImlkIjoiNjQ0NGM3YzQxNmEwOWExNDM0ZWIwYTAzIiwiaWF0IjoxNjgyMjI5MjI3fQ.qbICqKtO99gGD3boOjqgQQKm4rqttz1cnYB3YUVMuu8",
       username: "israel",
       name: "Admin User",
-      id: "6441f439514268758ceeb898",
+      id: "6444c7c416a09a1434eb0a03",
     };
 
     blog = {
@@ -111,9 +108,9 @@ describe("Exercise 5.15", () => {
     };
 
     mockHandler = jest.fn();
-    container = render(
+    render(
       <Blog blog={blog} currUser={currUser} addLikeHandler={mockHandler} />
-    ).container;
+    );
 
     user = userEvent.setup();
     button = screen.getByText("add like");
